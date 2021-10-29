@@ -4,10 +4,6 @@ const workoutSchema = new mongoose.Schema(
   {
     day: {
       type: Date,
-      // For some reason MONGODB IS ADDING 4 hours to the original time.
-      // If user creates a new workout at 9pm, it will register as the next day, which is wrong.
-      // For now, the workaround is to dedict 4hrs from the incorrect time
-      // default: () => new Date() - 4 * 3600 * 1000,
       default: Date.now(),
       unique: true,
     },
@@ -41,7 +37,7 @@ const workoutSchema = new mongoose.Schema(
     ],
   },
   {
-    // this is so tha the virtual property is output as a field in the request
+    // this is so tha the virtual property appears as a field in the request
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
@@ -54,9 +50,7 @@ workoutSchema.virtual('totalExercises').get(function () {
 });
 
 workoutSchema.virtual('totalDuration').get(function () {
-  const total = this.exercises
-    .map((item) => item.duration)
-    .reduce((prev, curr) => prev + curr, 0);
+  const total = this.exercises.map((item) => item.duration).reduce((prev, curr) => prev + curr, 0);
 
   return total;
 });

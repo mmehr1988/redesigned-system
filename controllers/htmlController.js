@@ -6,7 +6,7 @@ exports.getCoverPage = catchAsync(async (req, res, next) => {
   res.render('coverPage');
 });
 
-// [2] Rendering Home Page: The home page displays the stats for the last workout created.
+// [2] RENDER HOME PAGE WITH THE STATS OF THE LAST WORKOUT.
 exports.getHomePage = catchAsync(async (req, res, next) => {
   const workouts = await Workout.find({}).sort('-day').limit(1);
 
@@ -28,4 +28,21 @@ exports.getHomePage = catchAsync(async (req, res, next) => {
   } else {
     res.render('homePage');
   }
+});
+
+// [3] CREATE ONE WORKOUT
+exports.createOneWorkout = catchAsync(async (req, res, next) => {
+  const newdoc = await Workout.create(req.body);
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      workout: newdoc,
+    },
+  });
+});
+
+// [4] RENDER CREATE WORKOUT EXERCISE PAGE
+exports.getCreatePage = catchAsync(async (req, res, next) => {
+  res.render('createPage');
 });

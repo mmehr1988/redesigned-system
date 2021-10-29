@@ -1,0 +1,83 @@
+<div class='row align-items-center justify-content-center'>
+  <div class='col-md-7 col-lg-8'>
+    {{! ADD YOUR EXERCISE CONTAINER -------------------------------------- }}
+
+    <section class='section-add-exercise'>
+      <form class='form-exercise-container' novalidate>
+        <div class='row'>
+          {{!  EXERCISE TYPE ------------------------------------------------------------ }}
+          <div class='col-12'>
+            <label for='exercise-type' class='form-label'>Exercise Type</label>
+            <select class='form-select' id='exercise-type' required>
+              <option disabled selected>Select Exercise Type</option>
+              <option value='resistance'>Resistance</option>
+              <option value='cardio'>Cardio</option>
+            </select>
+          </div>
+
+          {{! -- EXERCISE: CARDIO ------------------------------------------------------------ }}
+          <div class='exercise-cardio-container d-none'>
+            {{!  EXERCISE NAME : CARDIO ------------------------------------------------------------ }}
+            <div class='cardio-name-container col-sm-12 pt-2'>
+              <label for='cardio-name' class='form-label'>Exercise Name</label>
+              <input id='cardio-name' class='form-control' type='text' name='cardio-name' placeholder='Running' value='' required />
+            </div>
+
+            {{! EXERCISE DISTANCE ------------------------------------------------------------ }}
+            <div class='cardio-distance-container col-sm-12 pt-2'>
+              <label for='cardio-distance' class='form-label'>Distance (miles)</label>
+              <input id='cardio-distance' class='form-control' type='number' name='cardio-name' placeholder='5' value='' required />
+            </div>
+
+            {{! EXERCISE DURATION ------------------------------------------------------------ }}
+            <div class='cardio-duration-container col-sm-12 pt-2'>
+              <label for='cardio-duration' class='form-label'>Duration (minutes)</label>
+              <input id='cardio-duration' class='form-control' type='number' name='cardio-duration' placeholder='10' value='' required />
+            </div>
+          </div>
+        </div>
+
+        {{! EXERCISE: RESISTANCE ------------------------------------------------------------ }}
+        <div class='exercise-resistance-container d-none'>
+          {{! EXERCISE NAME ------------------------------------------------------------ }}
+          <div class='resistance-name-container col-sm-12 pt-2'>
+            <label for='resistance-name' class='form-label'>Exercise Name</label>
+            <input id='resistance-name' class='form-control' type='text' name='resistance-name' placeholder='Bench Press' value='' required />
+          </div>
+
+          {{! EXERCISE WEIGHT ------------------------------------------------------------ }}
+          <div class='resistance-weight-container col-sm-12 pt-2'>
+            <label for='resistance-weight' class='form-label'>Weight (lbs)</label>
+            <input id='resistance-weight' class='form-control' type='number' name='resistance-weight' placeholder='200' value='' required />
+          </div>
+
+          {{! EXERCISE SETS ------------------------------------------------------------ }}
+          <div class='resistance-sets-container col-sm-12 pt-2'>
+            <label for='resistance-sets' class='form-label'>Sets</label>
+            <input id='resistance-sets' class='form-control' type='number' name='resistance-sets' placeholder='4' value='' required />
+          </div>
+
+          {{! EXERCISE REPS ------------------------------------------------------------ }}
+          <div class='resistance-reps-container col-sm-12 pt-2'>
+            <label for='resistance-reps' class='form-label'>Reps</label>
+            <input id='resistance-reps' class='form-control' type='number' name='resistance-reps' placeholder='10' value='' required />
+          </div>
+
+          {{! EXERCISE DURATION ------------------------------------------------------------ }}
+          <div class='resistance-duration-container col-sm-12 pt-2'>
+            <label for='resistance-duration' class='form-label'>Duration (minutes)</label>
+            <input id='resistance-duration' class='form-control' type='number' name='resistance-duration' placeholder='10' value='' required />
+          </div>
+        </div>
+
+        <hr class='my-4' />
+
+        <div class='d-flex gap-2 mt-0 p-0'>
+          <button disabled id='btn-complete' class='w-100 btn btn-primary btn-lg'>Complete</button>
+          <button disabled id='btn-add-exercise' class='w-100 btn btn-primary btn-lg text-nowrap'>Add Exercise</button>
+        </div>
+      </form>
+    </section>
+    {{! ADD YOUR EXERCISE CONTAINER -------------------------------------- }}
+  </div>
+</div>
