@@ -28,3 +28,24 @@ body {
   height: 48px !important;
   border: none;
 }
+
+/* ------------------------------------------------------ */
+/* NAVBAR */
+/* ------------------------------------------------------ */
+nav {
+  background-color: #81b9b9;
+}
+
+.navbar.close ~ .main-section {
+  padding-top: 80px;
+  height: calc(100vh - 80px);
+  width: 100%;
+  transition: all 0.5s ease;
+}
+
+.navbar ~ .main-section {
+  padding-top: 160px;
+  height: calc(100vh - 160px);
+  width: 100%;
+  transition: all 0.5s ease;
+}
