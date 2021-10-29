@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ------------------------------------------------------ */
+/* REUSABLE ITEMS */
+/* ------------------------------------------------------ */
+
+.hidden {
+  display: none;
+}
+
+/* ------------------------------------------------------ */
+/* COVER PAGE */
+/* ------------------------------------------------------ */
+#cover-page {
+  background-color: #81b9b9;
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+#enter-button {
+  width: 110px !important;
+  height: 48px !important;
+  border: none;
+}

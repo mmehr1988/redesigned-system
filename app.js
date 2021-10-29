@@ -5,10 +5,16 @@ const express = require('express');
 const morgan = require('morgan');
 
 // Error Handlers
+const exphbs = require('express-handlebars');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const workoutRouter = require('./routes/workoutRoutes');
+const htmlRouter = require('./routes/htmlRoutes');
+
+const helpers = require('./utils/helpers');
+
+const hbs = exphbs.create({ helpers });
 
 // A function that upon calling will add a bunch of methods from express to our variable = app
 const app = express();
@@ -30,6 +36,10 @@ app.use((req, res, next) => {
 
 // [3] ROUTES ---------------------------------------------------------------------------
 app.use('/api/workouts', workoutRouter);
+app.use('/', htmlRouter);
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // MIDDLEWARE: To handle the unhandled routes
 // Rememeber, middleware get added to the middleware stack and this is why this error handler works
