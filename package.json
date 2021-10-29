@@ -1,19 +1,22 @@
 {
-  "name": "mongoose_skeleton",
+  "name": "redesigned-system",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "watch": "nodemon server.js",
-    "seed": "node seeders/seed.js"
+    "start": "npx nodemon server.js",
+    "start:prod": "NODE_ENV=production npx nodemon server.js",
+    "seed": "node seeders/seed.js",
+    "debug": "npx ndb server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Mehdi Mehrabani",
+  "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3",
-    "mongoose": "^5.3.16",
-    "morgan": "^1.9.1"
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.13.11",
+    "morgan": "^1.10.0"
   }
 }
