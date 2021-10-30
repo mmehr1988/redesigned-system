@@ -27,4 +27,9 @@ router.route('/workouts/:id').get(htmlController.getHistoricalOne);
 // DELETE WORKOUT
 router.route('/workouts/:id').delete(htmlController.deleteHistoricalOne);
 
+// DELETE EXERCISE
+router
+  .route('/exercise-delete/:exId/:wktId')
+  .delete(htmlController.deleteHistoricalExercise);
+
 module.exports = router;

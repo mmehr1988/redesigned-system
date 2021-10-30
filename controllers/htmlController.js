@@ -33,12 +33,12 @@ exports.getHomePage = catchAsync(async (req, res, next) => {
 
 // [3] CREATE ONE WORKOUT
 exports.createOneWorkout = catchAsync(async (req, res, next) => {
-  const newdoc = await Workout.create(req.body);
+  const workout = await Workout.create(req.body);
 
   res.status(201).json({
     status: 'success',
     data: {
-      workout: newdoc,
+      workout,
     },
   });
 });
@@ -122,6 +122,29 @@ exports.getHistoricalOne = catchAsync(async (req, res, next) => {
 // [8] DELETE ONE WORKOUT
 exports.deleteHistoricalOne = catchAsync(async (req, res, next) => {
   const workout = await Workout.findByIdAndDelete(req.params.id);
+
+  if (!workout) {
+    return next(new AppError('No workout found with that ID', 404));
+  }
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});
+
+// [9] DELETE ONE EXERCISE
+exports.deleteHistoricalExercise = catchAsync(async (req, res, next) => {
+  const exId = req.params.exId;
+  const wktId = req.params.wktId;
+
+  const workout = await Workout.findByIdAndUpdate(
+    wktId,
+    { $pull: { exercises: { _id: exId } } },
+    {
+      new: true,
+    }
+  );
 
   if (!workout) {
     return next(new AppError('No workout found with that ID', 404));

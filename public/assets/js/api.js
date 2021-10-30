@@ -95,4 +95,19 @@ const API = {
       alert('Something went wrong');
     }
   },
+
+  // [8] EXERCISE DELETE BUTTON
+  async deleteOneExercise(exId, wktId) {
+    const options = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    const response = await fetch(`/exercise-delete/${exId}/${wktId}`, options);
+
+    if (response.ok) {
+      document.location.replace(`/workouts/${wktId}`);
+    } else {
+      alert('Something went wrong');
+    }
+  },
 };

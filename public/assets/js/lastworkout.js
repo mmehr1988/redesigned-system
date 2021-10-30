@@ -18,6 +18,7 @@ navigateNewWorkout.addEventListener('click', async () => {
   // - IF USER HAS NO WORKOUTS
   // - IF USER IS CREATING A NEW WORKOUT FOR A NEW DATE
   const create = await API.createWorkout();
-  const id = await create.data.workout._id;
+  console.log(create);
+  const id = await create.data.workout.id;
   await API.goToCreatePage(id);
 });
