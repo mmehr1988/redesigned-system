@@ -12,6 +12,10 @@ body {
   display: none;
 }
 
+.page-headers {
+  margin-bottom: 1rem !important;
+}
+
 /* ------------------------------------------------------ */
 /* COVER PAGE */
 /* ------------------------------------------------------ */
@@ -90,4 +94,21 @@ nav {
 
 .dash-update-btn {
   width: 140px !important;
+}
+
+/* ------------------------------------------------------ */
+/* WORKOUT OVERVIEW */
+/* ------------------------------------------------------ */
+.hist-container-header {
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.hist-view-button,
+.hist-delete-button,
+.hist-add-button,
+.hist-update-button,
+.hist-delete-button,
+.dash-date-dropdown {
+  width: 200px !important;
 }

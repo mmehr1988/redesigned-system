@@ -18,4 +18,13 @@ router.route('/create/:id?').get(htmlController.getCreatePage);
 // ADD EXERCISE
 router.route('/addexercise/:id').patch(htmlController.addExercise);
 
+// GET WORKOUTS OVERVIEW PAGE (for ALL historical workouts)
+router.route('/workouts').get(htmlController.getHistoricalView);
+
+// GET WORKOUT EXERCISE OVER PAGE (for ONE historical workouts)
+router.route('/workouts/:id').get(htmlController.getHistoricalOne);
+
+// DELETE WORKOUT
+router.route('/workouts/:id').delete(htmlController.deleteHistoricalOne);
+
 module.exports = router;

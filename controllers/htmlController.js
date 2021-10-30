@@ -1,5 +1,6 @@
 const Workout = require('../models/workoutModel');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 // [1] RENDER COVER PAGE
 exports.getCoverPage = catchAsync(async (req, res, next) => {
@@ -50,6 +51,11 @@ exports.getCreatePage = catchAsync(async (req, res, next) => {
 // [5] ADD EXERCISE BY UPDATING THE NEWLY CREATED WORKOUT
 exports.addExercise = catchAsync(async (req, res, next) => {
   const workoutCheck = await Workout.findById(req.params.id);
+
+  if (!workoutCheck) {
+    return next(new AppError('No workout found with that ID', 404));
+  }
+
   const newExerciseBody = workoutCheck.exercises;
   newExerciseBody.push(req.body);
 
@@ -66,5 +72,63 @@ exports.addExercise = catchAsync(async (req, res, next) => {
     data: {
       workout,
     },
+  });
+});
+
+// [6] VIEW HISTORICAL WORKOUTS PAGE
+exports.getHistoricalView = catchAsync(async (req, res, next) => {
+  const workouts = await Workout.find({}).sort('-day');
+
+  const workout = await workouts.map((item) => ({
+    date: item.day,
+    totalDuration: item.totalDuration,
+    totalExercises: item.totalExercises,
+    totalWeights: item.totalWeights,
+    totalSets: item.totalSets,
+    totalReps: item.totalReps,
+    id: item.id,
+  }));
+
+  res.status(200).render('workouts', { workout });
+});
+
+// [7] VIEW HISTORICAL WORKOUT EXERCISES PAGE
+exports.getHistoricalOne = catchAsync(async (req, res, next) => {
+  const workout = await Workout.findById(req.params.id);
+
+  if (!workout) {
+    return next(new AppError('No workout found with that ID', 404));
+  }
+
+  const exercises = await workout.exercises;
+  const date = await workout.day;
+
+  const exercise = exercises.map((item) => ({
+    type: item.type,
+    name: item.name,
+    duration: item.duration,
+    weight: item.weight,
+    reps: item.reps,
+    sets: item.sets,
+    distance: item.distance,
+    _id: item._id,
+  }));
+
+  res
+    .status(200)
+    .render('workoutUpdate', { exercise, date, id: req.params.id });
+});
+
+// [8] DELETE ONE WORKOUT
+exports.deleteHistoricalOne = catchAsync(async (req, res, next) => {
+  const workout = await Workout.findByIdAndDelete(req.params.id);
+
+  if (!workout) {
+    return next(new AppError('No workout found with that ID', 404));
+  }
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
   });
 });

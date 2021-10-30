@@ -65,4 +65,34 @@ const API = {
 
     return data;
   },
+  // [6] WORKOUTS VIEW BUTTON
+  async getOneWorkoutid(id) {
+    const options = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    const response = await fetch(`/workouts/${id}`, options);
+
+    if (response.ok) {
+      document.location.replace(`/workouts/${id}`);
+    } else {
+      alert('Something went wrong');
+    }
+  },
+
+  // [7] WORKOUTS DELETE BUTTON
+  async deleteOneWorkout(id) {
+    const options = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    const response = await fetch(`/workouts/${id}`, options);
+
+    if (response.ok) {
+      document.location.replace('/workouts');
+    } else {
+      alert('Something went wrong');
+    }
+  },
 };

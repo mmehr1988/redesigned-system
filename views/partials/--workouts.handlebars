@@ -1,0 +1,75 @@
+<section class='section-workout-intro'>
+  <div class='mb-3 text-center fs-5 intro-container'>
+
+    {{#if workout}}
+      {{#each workout}}
+        <div class='container'>
+          <div class='row rounded-3 border shadow-lg'>
+            <div class='col-lg-12 p-3 p-lg-5'>
+              {{! WORKOUT TITLE + BUTTONS }}
+              <div class='d-flex flex-wrap hist-container-header mb-1'>
+                <h4 class='m-0'>Last Workout:
+                  <span class='text-primary'>{{format_date date}}</span></h4>
+                <div class='d-flex justify-content-between gap-2'>
+                  <button
+                    type='button'
+                    class='btn btn-warning hist-view-button'
+                    data-id={{id}}
+                  >View</button>
+
+                  <button
+                    type='button'
+                    class='btn btn-danger hist-delete-button'
+                    data-id={{id}}
+                  >Delete</button>
+                </div>
+              </div>
+
+              {{! WORKOUT TABLE }}
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <th scope='col'>#</th>
+                    <th scope='col'>Data Type</th>
+                    <th scope='col'>Data Output</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope='row'>1</th>
+                    <td class='text-nowrap'>Total Duration (min)</td>
+                    <td>{{totalDuration}}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>2</th>
+                    <td class='text-nowrap'>Exercises Performed</td>
+                    <td>{{totalExercises}}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>3</th>
+                    <td class='text-nowrap'>Total Weight Lifted (lbs)</td>
+                    <td>{{totalWeights}}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>4</th>
+                    <td class='text-nowrap'>Total Sets Performed</td>
+                    <td>{{totalSets}}</td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>5</th>
+                    <td class='text-nowrap'>Total Reps Performed</td>
+                    <td>{{totalReps}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr class='my-4' />
+        </div>
+      {{/each}}
+    {{else}}
+      <h4>Currently you have no workouts...</h4>
+    {{/if}}
+  </div>
+
+</section>
