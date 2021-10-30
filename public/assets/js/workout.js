@@ -23,6 +23,10 @@ const resistanceDurationInput = document.querySelector('#resistance-duration');
 const completeButton = document.querySelector('#btn-complete');
 const addButton = document.querySelector('#btn-add-exercise');
 
+// [5] TOAST VARIABLES ------------------------------------------
+const myToast = document.getElementById('toast-add-exercise');
+const myToastBody = document.getElementById('toast-add-exercise-body');
+
 /////////////////////////////////////////////////////////////////
 // [2] FUNCTIONS
 /////////////////////////////////////////////////////////////////
@@ -124,6 +128,7 @@ async function handleFormSubmit(event) {
 
   clearInputs();
   validateInputs();
+  await handleToast(create.status);
 }
 
 function clearInputs() {
@@ -145,7 +150,11 @@ if (completeButton) {
   completeButton.addEventListener('click', async (event) => {
     event.preventDefault();
     await handleFormSubmit(event);
-    await API.goToHomePage();
+
+    // SETTIME FUNCTION TO SHOW THE LAST TOAST MESSAGE UPON USER CLICKING ON THE COMPLETE BUTTON
+    setTimeout(async () => {
+      await API.goToHomePage();
+    }, 1000);
   });
 }
 
@@ -154,3 +163,45 @@ if (addButton) {
 }
 
 document.querySelectorAll('input').forEach((element) => element.addEventListener('input', validateInputs));
+
+/////////////////////////////////////////////////////////////////////////
+// TOAST ALERT ON SUCCESS & FAIL On Success & Fail
+/////////////////////////////////////////////////////////////////////////
+
+// TOAST OPTIONS - OPTIONS FOR HOW TOAST ACT IN THE UI
+const myToastOptions = {
+  animation: true,
+  autohide: true,
+  delay: 2000,
+};
+
+// TOAST SUCCESS = EXERCISE WAS SUCCESSFULLY ADDED
+// TOAST FAIL = UNEXPECTED ISSUES.
+async function handleToast(status) {
+  if (status === 'success') {
+    await toastSuccess();
+  } else if (status === 'fail') {
+    await toastFail();
+  }
+}
+
+// IF CREATE STATUS = SUCCESS
+async function toastSuccess() {
+  myToast.classList.add('success');
+  myToastBody.innerHTML = 'Workout Added Successfully!';
+  const bsAlert = new bootstrap.Toast(myToast, myToastOptions);
+  await bsAlert.show();
+}
+
+// IF CREATE STATUS = FAIL
+async function toastFail() {
+  myToast.classList.remove('success');
+  myToastBody.innerHTML = 'Something Went Wrong!';
+  const myToastAlert = new bootstrap.Toast(myToast, myToastOptions);
+  await myToastAlert.show();
+
+  // TO RESET TOAST CLASS TO INCLUDE "SUCCESS". SEE CSS STYLING
+  setTimeout(() => {
+    myToast.classList.add('success');
+  }, 2000);
+}

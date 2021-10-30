@@ -49,3 +49,33 @@ nav {
   width: 100%;
   transition: all 0.5s ease;
 }
+
+/* ------------------------------------------------------ */
+/* TOAST */
+/* ------------------------------------------------------ */
+
+/* TOAST = FAIL */
+#toast-add-exercise {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 300px;
+  z-index: 9999;
+  background-color: hsl(0, 41%, 86%);
+  color: hsl(0, 90%, 16%);
+  border-radius: 0px;
+  margin-right: 10px;
+}
+
+/* TOAST = SUCCESS */
+#toast-add-exercise.success {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 300px;
+  z-index: 9999;
+  background-color: hsl(94, 40%, 86%);
+  color: hsl(94, 90%, 16%);
+  border-radius: 0px;
+  margin-right: 10px;
+}
