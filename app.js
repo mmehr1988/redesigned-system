@@ -23,7 +23,9 @@ const hbs = exphbs.create({ helpers });
 const app = express();
 
 //[1] MIDDLEWARES ---------------------------------------------------------------------------
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 
 // This is so the post requests are converted into a JSON format. Without it, when we make a post request, we would not be able to see the JSON data in console.
 app.use(express.json());
