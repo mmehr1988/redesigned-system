@@ -128,14 +128,14 @@ const API = {
     }
   },
 
-  // [10] A CHECK IN WORKOUT.JS TO REDIRECT USER TO THE HISTORICAL WORKOUT PAGE UPON IF ADDING AN EXERCISE IS FOR HISTORICAL WORKOUT. A SCENERIO FOR WHEN USER FORGETS AN EXERCISE THEY HAD DONE FOR A PREVIOUS DAY
-  async getLastWorkout() {
+  // [10] A CHECK IN WORKOUT.JS TO REDIRECT USER TO THE HISTORICAL WORKOUT PAGE IF ADDING AN EXERCISE IS FOR HISTORICAL WORKOUT. A SCENERIO FOR WHEN USER FORGETS AN EXERCISE THEY HAD DONE FOR A PREVIOUS DAY
+  async getOneWorkout(id) {
     const options = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     };
 
-    const response = await fetch('/last-workout', options);
+    const response = await fetch(`/get-one-workout/${id}`, options);
     const json = await response.json();
 
     return json;

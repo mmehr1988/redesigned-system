@@ -28,14 +28,12 @@ router.route('/workouts/:id').get(htmlController.getHistoricalOne);
 router.route('/workouts/:id').delete(htmlController.deleteHistoricalOne);
 
 // DELETE EXERCISE
-router
-  .route('/exercise-delete/:exId/:wktId')
-  .delete(htmlController.deleteHistoricalExercise);
+router.route('/exercise-delete/:exId/:wktId').delete(htmlController.deleteHistoricalExercise);
 
 // PATCH - TO UPDATE ONE WORKOUT
 router.route('/workouts/:id').patch(htmlController.updateHistWorkout);
 
 // GET REQUEST TO REDIRECT USER WHEN THEY ADD EXERCISE FOR A HISTORICAL DATE
-router.route('/last-workout').get(htmlController.getLastWorkID);
+router.route('/get-one-workout/:id').get(htmlController.getOneWorkout);
 
 module.exports = router;

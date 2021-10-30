@@ -1,6 +1,7 @@
 const Workout = require('../models/workoutModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const helpers = require('../utils/helpers');
 
 // [1] RENDER COVER PAGE
 exports.getCoverPage = catchAsync(async (req, res, next) => {
@@ -114,9 +115,7 @@ exports.getHistoricalOne = catchAsync(async (req, res, next) => {
     _id: item._id,
   }));
 
-  res
-    .status(200)
-    .render('workoutUpdate', { exercise, date, id: req.params.id });
+  res.status(200).render('workoutUpdate', { exercise, date, id: req.params.id });
 });
 
 // [8] DELETE ONE WORKOUT
@@ -174,18 +173,23 @@ exports.updateHistWorkout = catchAsync(async (req, res, next) => {
   });
 });
 
-// [11] TO GET LAST EXERCISE ID
-exports.getLastWorkID = catchAsync(async (req, res, next) => {
-  const workout = await Workout.find({}).sort('-day').limit(1);
+// [11] TO GET CURRENT WORKOUT DATA FOR WHEN USER CLICKS ON COMPLETE IN ADD EXERCISE
+exports.getOneWorkout = catchAsync(async (req, res, next) => {
+  const workout = await Workout.findById(req.params.id);
 
+  // TO CONVERT UTC DATE FOR VERIFICATION ON THE FRONT END
+  const workoutDate = helpers.format_date(workout.day);
+
+  // A 404 error for when user queries with ID
   if (!workout) {
-    return next(new AppError('No workout found', 404));
+    return next(new AppError('No workout found with that ID', 404));
   }
 
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
     data: {
       workout,
+      workoutDate,
     },
   });
 });

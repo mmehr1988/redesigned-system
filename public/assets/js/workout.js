@@ -27,6 +27,8 @@ const addButton = document.querySelector('#btn-add-exercise');
 const myToast = document.getElementById('toast-add-exercise');
 const myToastBody = document.getElementById('toast-add-exercise-body');
 
+const today = new Date().toLocaleDateString('en-US');
+
 /////////////////////////////////////////////////////////////////
 // [2] FUNCTIONS
 /////////////////////////////////////////////////////////////////
@@ -124,10 +126,7 @@ async function handleFormSubmit(event) {
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
 
-  const create = await API.addExercise(
-    workoutData,
-    window.location.pathname.split('/').pop()
-  );
+  const create = await API.addExercise(workoutData, window.location.pathname.split('/').pop());
 
   clearInputs();
   validateInputs();
@@ -153,17 +152,15 @@ if (completeButton) {
   completeButton.addEventListener('click', async (event) => {
     event.preventDefault();
     await handleFormSubmit(event);
-
-    // SETTIME FUNCTION TO SHOW THE LAST TOAST MESSAGE UPON USER CLICKING ON THE COMPLETE BUTTON
+    // // SETTIME FUNCTION TO SHOW THE LAST TOAST MESSAGE UPON USER CLICKING ON THE COMPLETE BUTTON
     setTimeout(async () => {
-      const lastWorkout = await API.getLastWorkout();
-      const lastWorkoutID = lastWorkout.data.workout[0].id;
-
-      const currentWorkout = window.location.pathname.split('/').pop();
-
       // NAVIGATE TO HOME PAGE - IF WORKOUT IS FOR TODAY
       // NAVIGATE BACK TO UPDATE PAGE - IF USER IS ADDING EXERCISES FOR HISTORICAL WORKOUTS INCASE THEY NEED TO UPDATE
-      if (lastWorkoutID === currentWorkout) {
+      const currentWorkout = window.location.pathname.split('/').pop();
+      const getWorkout = await API.getOneWorkout(currentWorkout);
+      const currentWorkoutDate = getWorkout.data.workoutDate;
+
+      if (currentWorkoutDate === today) {
         await API.goToHomePage();
       } else {
         await API.getOneWorkoutid(currentWorkout);
@@ -176,9 +173,7 @@ if (addButton) {
   addButton.addEventListener('click', handleFormSubmit);
 }
 
-document
-  .querySelectorAll('input')
-  .forEach((element) => element.addEventListener('input', validateInputs));
+document.querySelectorAll('input').forEach((element) => element.addEventListener('input', validateInputs));
 
 /////////////////////////////////////////////////////////////////////////
 // TOAST ALERT ON SUCCESS & FAIL On Success & Fail
