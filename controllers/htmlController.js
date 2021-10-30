@@ -46,3 +46,25 @@ exports.createOneWorkout = catchAsync(async (req, res, next) => {
 exports.getCreatePage = catchAsync(async (req, res, next) => {
   res.render('createPage');
 });
+
+// [5] ADD EXERCISE BY UPDATING THE NEWLY CREATED WORKOUT
+exports.addExercise = catchAsync(async (req, res, next) => {
+  const workoutCheck = await Workout.findById(req.params.id);
+  const newExerciseBody = workoutCheck.exercises;
+  newExerciseBody.push(req.body);
+
+  const workout = await Workout.findByIdAndUpdate(
+    req.params.id,
+    { exercises: newExerciseBody },
+    {
+      new: true,
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      workout,
+    },
+  });
+});

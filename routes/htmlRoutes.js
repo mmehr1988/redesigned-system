@@ -15,4 +15,7 @@ router.route('/create-one-workout').post(htmlController.createOneWorkout);
 // RENDER CREATE PAGE
 router.route('/create/:id?').get(htmlController.getCreatePage);
 
+// ADD EXERCISE
+router.route('/addexercise/:id').patch(htmlController.addExercise);
+
 module.exports = router;
