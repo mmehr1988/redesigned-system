@@ -1,8 +1,10 @@
+const path = require('path');
 // importing express
 const express = require('express');
 
 // HTTP request logger middleware
 const morgan = require('morgan');
+const compression = require('compression');
 
 // Error Handlers
 const exphbs = require('express-handlebars');
@@ -27,7 +29,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // To access the static files or in other words the public folder files
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// To compress all the text sent to client
+app.use(compression());
 
 // To add request time to when a request is made
 app.use((req, res, next) => {
