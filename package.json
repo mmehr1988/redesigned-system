@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "npx nodemon server.js",
+    "start": "node server.js",
+    "dev": "npx nodemon server.js",
     "seed": "node seeders/seed.js",
     "debug": "npx ndb server.js"
   },
@@ -29,5 +30,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "prettier": "^2.4.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
