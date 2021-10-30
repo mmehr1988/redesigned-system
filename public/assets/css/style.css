@@ -79,3 +79,15 @@ nav {
   border-radius: 0px;
   margin-right: 10px;
 }
+
+/* ------------------------------------------------------ */
+/* DASHBOARD PAGE */
+/* ------------------------------------------------------ */
+.dash-container-dropdown {
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.dash-update-btn {
+  width: 140px !important;
+}

@@ -53,4 +53,16 @@ const API = {
       alert('Something went wrong');
     }
   },
+
+  // [5] GET CHART DATA
+  async getChartData() {
+    const options = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    const response = await fetch('/dashboard/workoutdata', options);
+    const data = await response.json();
+
+    return data;
+  },
 };

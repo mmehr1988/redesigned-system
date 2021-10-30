@@ -1,0 +1,53 @@
+
+{{> --navBar}}
+
+<article class="main-section">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-md-12 fw-bold fs-1">Dashboard</div>
+        </div>
+
+        <div class='d-flex dash-container-dropdown gap-2 pb-2'>
+            <label for='dash-date-dropdown' class='form-label'></label>
+            <select class='form-select w-25 dash-date-dropdown' id='dash-date-dropdown'>
+                {{#if workoutDates}}
+                    {{#each workoutDates}}
+                        <option value='{{format_date date}}'>{{format_date date}}</option>
+                    {{/each}}
+                {{/if}}
+              </select>
+            <button type='button' id='dash-update-btn' class='btn btn-success dash-update-btn'>Update</button>
+        </div>
+
+        {{!-- CHARTS --}}
+        <div class="row pb-2">
+            {{!-- LINE CHART --}}
+            <div class="col-md-6 chart-container">
+                <div class="card">
+                    <div class="card-header text-center chart-header">
+                        Time Spent Working Out (Last 7 Workouts)
+                    </div>
+                    <div class="card-body">  
+                        <canvas id="canvas" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            {{!-- BAR CHART --}}
+            <div class="col-md-6 chart-container">
+                <div class="card">
+                    <div class="card-header text-center chart-header">
+                        Pounds Lifted (Last 7 Workouts)
+                    </div>
+                    <div class="card-body">  
+                        <canvas id="canvas2" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+{{! CHARTJS }}
+<script src='https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js'></script>
+<script src='/assets/js/api.js'></script>
+<script src='/assets/js/dashboard.js'></script>

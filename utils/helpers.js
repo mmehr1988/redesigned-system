@@ -10,4 +10,12 @@ module.exports = {
 
     return localDate;
   },
+  filter_data: async (data, keyName, field) => {
+    const workoutData = await data.map((item) => {
+      let newObjArr = new Object();
+      newObjArr[keyName] = item[field];
+      return newObjArr;
+    });
+    return workoutData;
+  },
 };
