@@ -155,3 +155,21 @@ exports.deleteHistoricalExercise = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+// [10] TO UPDATE WORKOUT WHEN USER IS IN HISTORICAL PAGE
+exports.updateHistWorkout = catchAsync(async (req, res, next) => {
+  const workout = await Workout.findByIdAndUpdate(
+    req.params.id,
+    { exercises: req.body },
+    {
+      new: true,
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      workout,
+    },
+  });
+});

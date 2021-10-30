@@ -32,4 +32,7 @@ router
   .route('/exercise-delete/:exId/:wktId')
   .delete(htmlController.deleteHistoricalExercise);
 
+// PATCH - TO UPDATE ONE WORKOUT
+router.route('/workouts/:id').patch(htmlController.updateHistWorkout);
+
 module.exports = router;

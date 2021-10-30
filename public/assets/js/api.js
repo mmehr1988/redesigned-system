@@ -110,4 +110,21 @@ const API = {
       alert('Something went wrong');
     }
   },
+
+  // [9] UPDATE WORKOUT
+  async updateWorkout(data = {}, id) {
+    const options = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    };
+    const response = await fetch(`/workouts/${id}`, options);
+    const created = await response.json();
+
+    if (response.ok) {
+      return created;
+    } else {
+      alert('Something went wrong');
+    }
+  },
 };
