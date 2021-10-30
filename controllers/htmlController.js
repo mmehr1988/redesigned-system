@@ -173,3 +173,19 @@ exports.updateHistWorkout = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+// [11] TO GET LAST EXERCISE ID
+exports.getLastWorkID = catchAsync(async (req, res, next) => {
+  const workout = await Workout.find({}).sort('-day').limit(1);
+
+  if (!workout) {
+    return next(new AppError('No workout found', 404));
+  }
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      workout,
+    },
+  });
+});

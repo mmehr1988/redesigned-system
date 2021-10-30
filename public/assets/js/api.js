@@ -127,4 +127,17 @@ const API = {
       alert('Something went wrong');
     }
   },
+
+  // [10] A CHECK IN WORKOUT.JS TO REDIRECT USER TO THE HISTORICAL WORKOUT PAGE UPON IF ADDING AN EXERCISE IS FOR HISTORICAL WORKOUT. A SCENERIO FOR WHEN USER FORGETS AN EXERCISE THEY HAD DONE FOR A PREVIOUS DAY
+  async getLastWorkout() {
+    const options = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    const response = await fetch('/last-workout', options);
+    const json = await response.json();
+
+    return json;
+  },
 };

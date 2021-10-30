@@ -35,4 +35,7 @@ router
 // PATCH - TO UPDATE ONE WORKOUT
 router.route('/workouts/:id').patch(htmlController.updateHistWorkout);
 
+// GET REQUEST TO REDIRECT USER WHEN THEY ADD EXERCISE FOR A HISTORICAL DATE
+router.route('/last-workout').get(htmlController.getLastWorkID);
+
 module.exports = router;

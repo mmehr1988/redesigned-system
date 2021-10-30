@@ -124,7 +124,10 @@ async function handleFormSubmit(event) {
     workoutData.duration = Number(resistanceDurationInput.value.trim());
   }
 
-  const create = await API.addExercise(workoutData, window.location.pathname.split('/').pop());
+  const create = await API.addExercise(
+    workoutData,
+    window.location.pathname.split('/').pop()
+  );
 
   clearInputs();
   validateInputs();
@@ -153,7 +156,18 @@ if (completeButton) {
 
     // SETTIME FUNCTION TO SHOW THE LAST TOAST MESSAGE UPON USER CLICKING ON THE COMPLETE BUTTON
     setTimeout(async () => {
-      await API.goToHomePage();
+      const lastWorkout = await API.getLastWorkout();
+      const lastWorkoutID = lastWorkout.data.workout[0].id;
+
+      const currentWorkout = window.location.pathname.split('/').pop();
+
+      // NAVIGATE TO HOME PAGE - IF WORKOUT IS FOR TODAY
+      // NAVIGATE BACK TO UPDATE PAGE - IF USER IS ADDING EXERCISES FOR HISTORICAL WORKOUTS INCASE THEY NEED TO UPDATE
+      if (lastWorkoutID === currentWorkout) {
+        await API.goToHomePage();
+      } else {
+        await API.getOneWorkoutid(currentWorkout);
+      }
     }, 1000);
   });
 }
@@ -162,7 +176,9 @@ if (addButton) {
   addButton.addEventListener('click', handleFormSubmit);
 }
 
-document.querySelectorAll('input').forEach((element) => element.addEventListener('input', validateInputs));
+document
+  .querySelectorAll('input')
+  .forEach((element) => element.addEventListener('input', validateInputs));
 
 /////////////////////////////////////////////////////////////////////////
 // TOAST ALERT ON SUCCESS & FAIL On Success & Fail
