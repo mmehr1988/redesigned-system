@@ -1,6 +1,6 @@
 # redesigned-system
 
-## Assignment: Workout Tracker
+## Assignment: Fitness Tracker
 
 <a href="https://choosealicense.com/licenses/mit" target="_blank"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" /></a>
 
@@ -15,7 +15,7 @@
 
 ## Description
 
-Redesigned System is a workout tracker app that allows the user to create, view, update, and delete daily and historical workouts.
+Redesigned System is a fitness tracker app that allows the user to create, view, update, and delete daily and historical workouts.
 
 The user is also provided with a dashboard page that summarizes the last 7 workouts in the form of two charts. The first chart is a line chart that shows the time spent working out and the second chart is a bar chart that shows the the pounds lifted.
 
